@@ -18,10 +18,13 @@ public class CreateMessageActivity extends Activity {
     //Call onSendMessage() when the button is clicked
     public void onSendMessage(View view){
         EditText messageView = (EditText) findViewById(R.id.message);
+        String chooserTitle = getString(R.string.chooser);
         String messageText = messageView.getText().toString();
-        Intent intent = new Intent(this, RecieveMessageActivity.class);
-        intent.putExtra(RecieveMessageActivity.EXTRA_MESSAGE, messageText);
-        startActivity(intent);
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, messageText);
+        Intent chosenIntent = Intent.createChooser(intent, chooserTitle);
+        startActivity(chosenIntent);
     }
 }
 
